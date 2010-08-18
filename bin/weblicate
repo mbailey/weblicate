@@ -11,7 +11,9 @@ File.open('hosts-' + a.dest_domain, 'w') { |file| file.write(a.hosts_file) }
 File.open('vhosts-' + a.dest_domain, 'w') { |file| file.write(a.vhosts) }
 File.open('dns-' + a.dest_domain, 'w') { |file| file.write(a.dns) }
 
+puts 
 puts "Now run these commands..."
 puts "rsync -avz files-#{a.dest_domain}/ #{a.dest_domain}:/var/www/weblicate/"
 puts "scp vhosts-#{a.dest_domain} #{a.dest_domain}:/etc/apache2/apps/"
+puts "# Now reload apache"
 puts "sh dns-#{a.dest_domain} # (optional) Create domains on Slicehost"
