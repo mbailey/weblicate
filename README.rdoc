@@ -22,11 +22,11 @@ generates the following output:
 
   files-usa.weblicate.info   # All files and assets for the page
   hosts-usa.weblicate.info   # Entries that can be added to your local hosts file
+  vhosts-usa.weblicate.info  # Apache vhosts entries for all domains
 
-You also get these if you want the outside world to be able to see your weblicant:
+You also get these in case you want the outside world to be able to see your weblicant:
 
   dns-usa.weblicate.info     # A script to create DNS entries (on Slicehost.com)
-  vhosts-usa.weblicate.info  # Apache vhosts entries for all domains
 
 == Copyright
 
