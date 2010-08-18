@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+require 'weblicate'
+
+harfile = ARGV[0]
+dest_domain = ARGV[1] || nil 
+
+a = Har.new harfile, :dest_domain => dest_domain
+a.get_files
+File.open('hosts-' + a.dest_domain, 'w') { |file| file.write(a.hosts_file) }
+File.open('vhosts-' + a.dest_domain, 'w') { |file| file.write(a.vhosts) }
+File.open('dns-' + a.dest_domain, 'w') { |file| file.write(a.dns) }
+
+puts "Now run these commands..."
+puts "rsync -avz files-#{a.dest_domain}/ #{a.dest_domain}:/var/www/weblicate/"
+puts "sh dns-#{a.dest_domain}"
+puts "scp vhosts-#{a.dest_domain} #{a.dest_domain}:/etc/apache2/apps/"
