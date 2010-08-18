@@ -3,6 +3,12 @@ $LOAD_PATH.unshift File.join(File.dirname(__FILE__), '..', 'lib')
 require 'weblicate'
 
 harfile = ARGV[0]
+
+if ! harfile
+  puts "Usage: weblicate harfile [domain to append]"
+  exit 1
+end
+
 dest_domain = ARGV[1] || nil 
 
 a = Har.new harfile, :dest_domain => dest_domain
