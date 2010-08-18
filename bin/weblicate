@@ -29,8 +29,7 @@ if dest_domain
   puts <<-EOF
 rsync -avz #{files_dir} #{a.dest_domain}:/var/www/weblicate/
 scp #{vhosts_file} #{a.dest_domain}:/etc/apache2/sites-enabled/
-apache2ctl restart
-cat #{hosts_file} >> /etc/hosts # For access from workstation
+ssh #{a.dest_domain} "sudo apache2ctl restart"
 sh #{dns_script} # Create domains on Slicehost
 EOF
 

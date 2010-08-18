@@ -70,8 +70,8 @@ class Har
 <<-EOF
 <VirtualHost *:80>
   ServerName #{host}.#{@dest_domain}
-  DocumentRoot /var/www/weblicate/#{@name}/#{host}.#{@dest_domain}
-  <Directory /var/www/weblicate/#{@name}/#{host}.#{@dest_domain}>
+  DocumentRoot /var/www/weblicate/#{@name}-files/#{host}.#{@dest_domain}
+  <Directory /var/www/weblicate/#{@name}-files/#{host}.#{@dest_domain}>
     Order allow,deny
     Allow from all
   </Directory>
