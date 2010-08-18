@@ -1,16 +1,28 @@
 = weblicate
 
-Description goes here.
+Replicate a website.
 
-== Note on Patches/Pull Requests
+Weblicate creates a copy of a web page, complete with third party assets, to be run on your own webserver.
+When given a HAR file, weblicate writes all assets to local disk. It appends a domain to the end of all
+URLs so you can simulate external requests from sites like doubleclick and google.
+
+Running the following command:
+
+  weblicate www.cnn.com.har usa.weblicate.info
+
+generates the following output:
+
+  files-usa.weblicate.info   # All files and assets for the page
+  hosts-usa.weblicate.info   # Entries that can be added to your local hosts file
+
+You also get these if you want the outside world to be able to see your weblicant:
+
+  dns-usa.weblicate.info     # A script to create DNS entries (on Slicehost.com)
+  vhosts-usa.weblicate.info  # Apache vhosts entries for all domains
+
+== Installation
  
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+  sudo gem install weblicate
 
 == Copyright
 
