@@ -9,6 +9,7 @@ require 'net/http'
 class Har
 
   attr_accessor :dest_domain
+  attr_reader :har_file, :har_title
 
   def initialize(harfile, options={})
     @dest_domain = options[:dest_domain] || 'localhost'
@@ -18,6 +19,8 @@ class Har
     else
       contents = harfile
     end
+    @har_file = harfile
+    @har_title = File.basename(harfile, '.har')
     @har = JSON.parse(contents)
   end
 
@@ -52,7 +55,7 @@ class Har
 
   def save_file(url, contents)
     uri = URI.parse(url)
-    dest = File.join("files-#{@dest_domain}", uri.host+'.'+@dest_domain, uri.path) 
+    dest = File.join("#{@har_title}-files", uri.host+'.'+@dest_domain, uri.path) 
     dest << 'index.html' if dest[-1,1] == '/'
     FileUtils.mkdir_p File.dirname dest
     File.open(dest, "w") { |file| file.write contents }

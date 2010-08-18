@@ -7,13 +7,25 @@ dest_domain = ARGV[1] || nil
 
 a = Har.new harfile, :dest_domain => dest_domain
 a.get_files
-File.open('hosts-' + a.dest_domain, 'w') { |file| file.write(a.hosts_file) }
-File.open('vhosts-' + a.dest_domain, 'w') { |file| file.write(a.vhosts) }
-File.open('dns-' + a.dest_domain, 'w') { |file| file.write(a.dns) }
 
-puts 
-puts "Now run these commands..."
-puts "rsync -avz files-#{a.dest_domain}/ #{a.dest_domain}:/var/www/weblicate/"
-puts "scp vhosts-#{a.dest_domain} #{a.dest_domain}:/etc/apache2/apps/"
-puts "# Now reload apache"
-puts "sh dns-#{a.dest_domain} # (optional) Create domains on Slicehost"
+files_dir = a.har_title + '-files'
+vhosts_file = a.har_title + '-vhosts'
+hosts_file = a.har_title + '-hosts'
+dns_script = a.har_title + '-dns'
+
+File.open(vhosts_file, 'w') { |file| file.write(a.vhosts) }
+File.open(hosts_file, 'w') { |file| file.write(a.hosts_file) }
+File.open(dns_script, 'w') { |file| file.write(a.dns) }
+
+puts <<-EOF
+
+Now run these commands...
+
+rsync -avz #{files_dir}/ #{a.dest_domain}:/var/www/weblicate/
+scp #{vhosts_file} #{a.dest_domain}:/etc/apache2/sites-enabled/
+cat #{hosts_file} >> /etc/hosts # For access from workstation
+
+OPTIONAL - if you want access from the wider internet
+sh #{dns_script} # Create domains on Slicehost
+
+EOF
