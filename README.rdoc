@@ -31,7 +31,7 @@ Results in the following response:
   OPTIONAL - if you want access from the wider internet
   sh www.cnn.com-dns # Create domains on Slicehost
 
-generates the following output:
+and generates the following output:
 
   www.cnn.com-files  # All files and assets for the page
   www.cnn.com-hosts  # Entries that can be added to your local hosts file
