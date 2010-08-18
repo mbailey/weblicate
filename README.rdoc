@@ -20,22 +20,13 @@ Running the following command:
 
   weblicate www.cnn.com.har
 
-Results in the following response:
-
-  Now run these commands...
-
-  rsync -avz www.cnn.com-files/ localhost:/var/www/weblicate/www.cnn.com/
-  scp www.cnn.com-vhosts localhost:/etc/apache2/sites-enabled/
-  cat www.cnn.com-hosts >> /etc/hosts # For access from workstation
-
-  OPTIONAL - if you want access from the wider internet
-  sh www.cnn.com-dns # Create domains on Slicehost
-
-and generates the following output:
+generates the following output:
 
   www.cnn.com-files  # All files and assets for the page
   www.cnn.com-hosts  # Entries that can be added to your local hosts file
   www.cnn.com-vhosts # Apache vhosts entries for all domains
+
+and displays some commands that will put your files and apache vhosts in place.
 
 By default, weblicate appends '.localhost' to all domains. You can over ride
 this if you want you weblicant to be accessible to the greater internet.
