@@ -20,6 +20,17 @@ Running the following command:
 
   weblicate www.cnn.com.har
 
+Results in the following response:
+
+  Now run these commands...
+
+  rsync -avz www.cnn.com-files/ localhost:/var/www/weblicate/www.cnn.com/
+  scp www.cnn.com-vhosts localhost:/etc/apache2/sites-enabled/
+  cat www.cnn.com-hosts >> /etc/hosts # For access from workstation
+
+  OPTIONAL - if you want access from the wider internet
+  sh www.cnn.com-dns # Create domains on Slicehost
+
 generates the following output:
 
   www.cnn.com-files  # All files and assets for the page
