@@ -11,7 +11,7 @@ class Har
   attr_accessor :dest_domain
 
   def initialize(harfile, options={})
-    @dest_domain = options[:dest_domain] || 'local'
+    @dest_domain = options[:dest_domain] || 'localhost'
     
     if File.exists? harfile
       contents = File.read(harfile)
