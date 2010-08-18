@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "weblicate"
     gem.summary = %Q{Replicate a website}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.description = %Q{Replicate a website based on a HAR file}
     gem.email = "mike@bailey.net.au"
     gem.homepage = "http://github.com/mbailey/weblicate"
     gem.authors = ["Mike Bailey"]
