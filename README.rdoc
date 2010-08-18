@@ -6,7 +6,7 @@ Weblicate creates a copy of a web page, complete with third party assets, to be 
 When given a HAR file, weblicate writes all assets to local disk. It appends a domain to the end of all
 URLs so you can simulate external requests from sites like doubleclick and google.
 
-HAR, (or HTTP Archive) files are a great way to pass around information about web pages. Firebug lets you export them.
+HAR (HTTP Archive) files are a great way to pass around information about web pages. Firebug lets you export them.
 
 == Installation
 
