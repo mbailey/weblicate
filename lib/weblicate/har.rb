@@ -8,8 +8,7 @@ require 'net/http'
 
 class Har
 
-  attr_accessor :dest_domain
-  attr_reader :har_file, :har_title
+  attr_accessor :dest_domain, :name
 
   def initialize(harfile, options={})
     @dest_domain = options[:dest_domain] || 'localhost'
@@ -19,8 +18,7 @@ class Har
     else
       contents = harfile
     end
-    @har_file = harfile
-    @har_title = File.basename(harfile, '.har')
+    @name = File.basename(harfile, '.har')
     @har = JSON.parse(contents)
   end
 
@@ -55,9 +53,13 @@ class Har
 
   def save_file(url, contents)
     uri = URI.parse(url)
-    dest = File.join("#{@har_title}-files", uri.host+'.'+@dest_domain, uri.path) 
+    dest = File.join("#{@name}-files", uri.host+'.'+@dest_domain, uri.path) 
     dest << 'index.html' if dest[-1,1] == '/'
-    FileUtils.mkdir_p File.dirname dest
+    begin
+      FileUtils.mkdir_p File.dirname dest
+    rescue
+      puts "Error! Could not create #{File.dirname dest}"
+    end
     File.open(dest, "w") { |file| file.write contents }
   rescue
     puts "Failed to parse url (#{url})"
@@ -68,8 +70,8 @@ class Har
 <<-EOF
 <VirtualHost *:80>
   ServerName #{host}.#{@dest_domain}
-  DocumentRoot /var/www/weblicate/#{host}.#{@dest_domain}
-  <Directory /var/www/weblicate/#{host}.#{@dest_domain}>
+  DocumentRoot /var/www/weblicate/#{@name}/#{host}.#{@dest_domain}
+  <Directory /var/www/weblicate/#{@name}/#{host}.#{@dest_domain}>
     Order allow,deny
     Allow from all
   </Directory>

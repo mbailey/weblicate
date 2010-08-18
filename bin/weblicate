@@ -8,10 +8,10 @@ dest_domain = ARGV[1] || nil
 a = Har.new harfile, :dest_domain => dest_domain
 a.get_files
 
-files_dir = a.har_title + '-files'
-vhosts_file = a.har_title + '-vhosts'
-hosts_file = a.har_title + '-hosts'
-dns_script = a.har_title + '-dns'
+files_dir = a.name + '-files'
+vhosts_file = a.name + '-vhosts'
+hosts_file = a.name + '-hosts'
+dns_script = a.name + '-dns'
 
 File.open(vhosts_file, 'w') { |file| file.write(a.vhosts) }
 File.open(hosts_file, 'w') { |file| file.write(a.hosts_file) }
@@ -21,7 +21,7 @@ puts <<-EOF
 
 Now run these commands...
 
-rsync -avz #{files_dir}/ #{a.dest_domain}:/var/www/weblicate/
+rsync -avz #{files_dir}/ #{a.dest_domain}:/var/www/weblicate/#{a.name}/
 scp #{vhosts_file} #{a.dest_domain}:/etc/apache2/sites-enabled/
 cat #{hosts_file} >> /etc/hosts # For access from workstation
 
