@@ -5,7 +5,7 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "weblicate"
-    gem.version = '0.0.7'
+    gem.version = '0.0.8'
     gem.summary = %Q{Replicate a website}
     gem.description = %Q{Replicate a website based on a HAR file}
     gem.email = "mike@bailey.net.au"
